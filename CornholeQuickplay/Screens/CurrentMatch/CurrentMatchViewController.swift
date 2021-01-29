@@ -5,6 +5,8 @@ class CurrentMatchViewController: UIViewController {
     private weak var frameHistoryTableView: UITableView!
     private weak var bagTossOutcomeSectionView: BagTossOutcomeSectionView!
     private weak var completeRoundButton: CHButton!
+    private weak var undoFrameButton: CHButton!
+    private weak var resetMatchButton: CHButton!
 
     var router: CurrentMatchRouterType!
     var presenter: CurrentMatchPresenterType!
@@ -13,11 +15,15 @@ class CurrentMatchViewController: UIViewController {
         super.loadView()
 
         let matchScoreView = MatchScoreView(frame: .zero)
-        let completeRoundButton = CHButton(frame: .zero)
-        let bagTossOutcomeSectionView = BagTossOutcomeSectionView(frame: .zero)
         let frameHistoryTableView = UITableView(frame: .zero)
         frameHistoryTableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubviews(matchScoreView, frameHistoryTableView, bagTossOutcomeSectionView, completeRoundButton)
+        let bagTossOutcomeSectionView = BagTossOutcomeSectionView(frame: .zero)
+        let completeRoundButton = CHButton(frame: .zero)
+        let undoFrameButton = CHButton(frame: .zero)
+        let resetMatchButton = CHButton(frame: .zero)
+        view.addSubviews(matchScoreView, frameHistoryTableView, bagTossOutcomeSectionView,
+                         completeRoundButton, undoFrameButton, resetMatchButton
+        )
 
         NSLayoutConstraint.activate([
             matchScoreView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
@@ -31,18 +37,30 @@ class CurrentMatchViewController: UIViewController {
 
             bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             bagTossOutcomeSectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            bagTossOutcomeSectionView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -16),
+            bagTossOutcomeSectionView.bottomAnchor.constraint(equalTo: completeRoundButton.topAnchor, constant: -8),
 
-            completeRoundButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            completeRoundButton.heightAnchor.constraint(equalToConstant: 44),
             completeRoundButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             completeRoundButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            completeRoundButton.heightAnchor.constraint(equalToConstant: 44)
+            completeRoundButton.bottomAnchor.constraint(equalTo: resetMatchButton.topAnchor, constant: -16),
+
+            undoFrameButton.heightAnchor.constraint(equalToConstant: 44),
+            undoFrameButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            undoFrameButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -4),
+            undoFrameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+
+            resetMatchButton.heightAnchor.constraint(equalToConstant: 44),
+            resetMatchButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 4),
+            resetMatchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            resetMatchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
         ])
 
         self.matchScoreSection = matchScoreView
         self.frameHistoryTableView = frameHistoryTableView
         self.bagTossOutcomeSectionView = bagTossOutcomeSectionView
         self.completeRoundButton = completeRoundButton
+        self.undoFrameButton = undoFrameButton
+        self.resetMatchButton = resetMatchButton
     }
 
     override func viewDidLoad() {
@@ -66,9 +84,27 @@ class CurrentMatchViewController: UIViewController {
     private func configureRoundCompleteButton() {
         completeRoundButton.setTitle("Complete Round", for: .normal)
         completeRoundButton.addTarget(self, action: #selector(didTapCompleteRoundButton), for: .touchUpInside)
+
+        undoFrameButton.setTitle("Undo Frame", for: .normal)
+        undoFrameButton.addTarget(self, action: #selector(didTapUndoFrame), for: .touchUpInside)
+
+        resetMatchButton.setTitle("Reset Match", for: .normal)
+        resetMatchButton.addTarget(self, action: #selector(didTapResetMatch), for: .touchUpInside)
+
+    }
+
+    @objc func didTapUndoFrame() {
+        let alertController = presenter.showUndoFrameAlertController()
+        present(alertController, animated: true)
+    }
+
+    @objc func didTapResetMatch() {
+        let alertController = presenter.showResetMatchAlertController()
+        present(alertController, animated: true)
     }
 
     @objc func didTapCompleteRoundButton() {
+        completeRoundButton.animateButtonTap()
         presenter.didTeamReachScoreLimit()
     }
 
@@ -83,6 +119,12 @@ extension CurrentMatchViewController: CurrentMatchViewType {
     func insertFrameRowAtTopOfTable() {
         frameHistoryTableView.beginUpdates()
         frameHistoryTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+        frameHistoryTableView.endUpdates()
+    }
+
+    func removeFrameRowFromTopOfTable() {
+        frameHistoryTableView.beginUpdates()
+        frameHistoryTableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .left)
         frameHistoryTableView.endUpdates()
     }
 
@@ -111,6 +153,10 @@ extension CurrentMatchViewController: CurrentMatchViewType {
             redTeamMatchScore: redTeamMatchScore
         )
         bagTossOutcomeSectionView.resetScoreSteppers()
+    }
+
+    func toMainMenu() {
+        dismiss(animated: true)
     }
 
     func showMatchDetails() {

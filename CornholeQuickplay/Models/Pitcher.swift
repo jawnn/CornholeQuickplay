@@ -33,4 +33,13 @@ class Pitcher {
         frames.append(frame)
     }
 
+    func decrementStats(with frame: FrameStat) {
+        totalScore -= frame.score
+        totalOnBoard -= frame.onBoard
+        totalOffBoard -= frame.offBoard
+        totalCornholes -= frame.cornholes
+        matchPlusMinus -= frame.plusMinus
+        frames.removeLast()
+    }
+
 }

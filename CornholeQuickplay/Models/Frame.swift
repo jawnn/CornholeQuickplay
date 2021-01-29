@@ -30,7 +30,7 @@ class Frame {
         self.blueFrame.plusMinus = blueScore - redScore
         self.redFrame.plusMinus = redScore - blueScore
         self.scoringTeam = blueScore > redScore ? .blue : .red
-        return max(self.blueFrame.plusMinus, redFrame.plusMinus)
+        return max(blueFrame.plusMinus, redFrame.plusMinus)
     }
 
 }

@@ -11,7 +11,6 @@ class Pitcher {
     var matchPlusMinus: Int = 0
 
     var averageScore: Double {
-
         return Double(self.totalScore) / Double(self.frames.count)
     }
 

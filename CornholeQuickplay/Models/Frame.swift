@@ -24,6 +24,7 @@ class Frame {
         let blueScore = blueFrame.score
         let redScore = redFrame.score
         guard blueScore != redScore else {
+            self.scoringTeam = .none
             return 0
         }
         self.blueFrame.plusMinus = blueScore - redScore

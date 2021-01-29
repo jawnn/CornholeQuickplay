@@ -1,9 +1,9 @@
 import Foundation
 
 protocol MatchResultModelType {
-    var match: Match { get }
-    var winningTeam: Team { get }
-    var losingTeam: Team { get }
+    var match: Match { get set }
+    var winningTeam: Team { get set }
+    var losingTeam: Team { get set }
 }
 
 class MatchResultModel: MatchResultModelType {

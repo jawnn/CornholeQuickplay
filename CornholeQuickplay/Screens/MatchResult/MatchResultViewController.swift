@@ -2,8 +2,8 @@ import UIKit
 
 class MatchResultViewController: UIViewController {
 
-    private weak var finalScoreBanner: FinalScoreBanner!
-    private weak var tableView: UITableView!
+    weak var finalScoreBanner: FinalScoreBanner!
+    weak var tableView: UITableView!
     private weak var mainMenuButton: CHButton!
     private weak var playAgainButton: CHButton!
 
@@ -57,7 +57,6 @@ class MatchResultViewController: UIViewController {
     }
 
     func configureResultsTableView() {
-        tableView.delegate = self
         tableView.dataSource = presenter
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
@@ -87,8 +86,4 @@ extension MatchResultViewController: MatchResultViewType {
     func populateScoreBanner(redScore: Int, blueScore: Int) {
         finalScoreBanner.configureViewContent(redScore: redScore, blueScore: blueScore)
     }
-}
-
-extension MatchResultViewController: UITableViewDelegate {
-    
 }

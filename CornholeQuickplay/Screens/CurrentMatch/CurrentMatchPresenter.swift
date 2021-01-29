@@ -6,12 +6,16 @@ protocol CurrentMatchPresenterType: UITableViewDataSource, ScoreOutcomeDelegate 
     func startNextFrame()
     func sendNewFrameData()
     func didTeamReachScoreLimit()
+    func showUndoFrameAlertController() -> UIAlertController
+    func showResetMatchAlertController() -> UIAlertController
 }
 
 protocol CurrentMatchViewType {
+    func toMainMenu()
     func showMatchDetails()
     func reloadFrameHistoryData()
     func insertFrameRowAtTopOfTable()
+    func removeFrameRowFromTopOfTable()
     func updateScore(for stepper: ScoreStepperTag, with value: Int, frameScore: Int)
     func populateViewsForNextFrame(bluePitcher name: String, redPitcher name: String, blueTeam score: Int, redTeam score: Int)
 }
@@ -27,6 +31,62 @@ class CurrentMatchPresenter: NSObject, CurrentMatchPresenterType {
         self.view = view
 
         self.currentMatch = model.currentMatch
+    }
+
+    func showResetMatchAlertController() -> UIAlertController {
+        let alertController = UIAlertController(title: "Are you sure you want to reset this match?", message: "This action is IRREVERSIBLE.", preferredStyle: .actionSheet)
+        alertController.addAction(
+            UIAlertAction(title: "Reset Match", style: .destructive, handler: {
+                [weak self]  _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.view.toMainMenu()
+            })
+        )
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        return alertController
+    }
+
+    func showUndoFrameAlertController() -> UIAlertController {
+        let alertController = UIAlertController(title: "Are you sure you want to undo the last frame?", message: "This action is IRREVERSIBLE.", preferredStyle: .actionSheet)
+
+        alertController.addAction(
+            UIAlertAction(title: "Undo Frame", style: .destructive, handler: {
+                [weak self]  _ in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.undoLastFrame()
+                strongSelf.view.removeFrameRowFromTopOfTable()
+                strongSelf.sendNewFrameData()
+            })
+        )
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        return alertController
+    }
+
+    func undoLastFrame() {
+        guard model.currentMatch.frames.first != nil else {
+            return
+        }
+        let lastFrame = model.currentMatch.frames.removeFirst()
+        let redPitcher = lastFrame.redFrame.pitcher
+        let bluePitcher = lastFrame.blueFrame.pitcher
+        model.currentMatch.currentFrameNumber -= 1
+
+        if lastFrame.scoringTeam == .blue {
+            model.currentMatch.blueTeam.score -= lastFrame.generateFrameScore()
+        } else if lastFrame.scoringTeam == .red {
+            model.currentMatch.redTeam.score -= lastFrame.generateFrameScore()
+        }
+
+        redPitcher.decrementStats(with: lastFrame.redFrame)
+        bluePitcher.decrementStats(with: lastFrame.blueFrame)
+        let redoFrame = Frame(frame: model.currentMatch.currentFrameNumber, bluePitcher: FrameStat(pitcher: bluePitcher), redPitcher: FrameStat(pitcher: redPitcher))
+        model.currentFrame = redoFrame
     }
 
     func sendNewMatchData() {
@@ -99,7 +159,7 @@ extension CurrentMatchPresenter {
 
         let currentFrame = model.currentMatch.frames[indexPath.row]
         cell.layoutViewConfigurations(scoringTeam: currentFrame.scoringTeam)
-        cell.frameOutcomeLabel.text = "+\(currentFrame.generatePlusMinus())"
+        cell.frameOutcomeLabel.text = "+\(currentFrame.generateFrameScore())"
         cell.bluePitcherLabel.text = currentFrame.blueFrame.pitcher.name
         cell.blueScoreLabel.text = "\(currentFrame.blueFrame.score)"
         cell.redPitcherLabel.text = currentFrame.redFrame.pitcher.name

@@ -65,13 +65,14 @@ class MainMenuViewController: UIViewController {
     @objc func didTapGameModeButton(sender: UIButton) {
         switch sender.tag {
         case MatchType.single.rawValue:
+            sender.animateButtonTap()
             router.toMatchViewController(matchType: MatchType.single)
         case MatchType.doubles.rawValue:
+            sender.animateButtonTap()
             router.toMatchViewController(matchType: MatchType.doubles)
         default:
             break
         }
-        
     }
 
 

@@ -23,7 +23,7 @@ enum TeamColor: Int {
         case .red:
             return UIColor.systemRed
         default:
-            return UIColor.systemGray5
+            return UIColor.systemGray
         }
     }
 }

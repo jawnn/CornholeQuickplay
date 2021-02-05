@@ -25,7 +25,7 @@ class FrameTableCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(systemName: "arrowtriangle.left.fill")
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .tertiarySystemBackground
+        imageView.tintColor = .label
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()

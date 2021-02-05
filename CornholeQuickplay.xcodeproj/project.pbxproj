@@ -52,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D26CE02925CCD07C008B1F74 /* simulator_screenshot_2617B5B7-9FE2-4681-B938-30D883E1FC62.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simulator_screenshot_2617B5B7-9FE2-4681-B938-30D883E1FC62.png"; path = "../../../../var/folders/4p/d87k73pd3gl8lmm6kc9_2ctr0000gn/T/simulator_screenshot_2617B5B7-9FE2-4681-B938-30D883E1FC62.png"; sourceTree = "<group>"; };
 		D272EFCE25C0A7F000FEB91E /* CornholeQuickplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CornholeQuickplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D272EFD125C0A7F000FEB91E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D272EFD325C0A7F000FEB91E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,12 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D26CE02825CCD07C008B1F74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D26CE02925CCD07C008B1F74 /* simulator_screenshot_2617B5B7-9FE2-4681-B938-30D883E1FC62.png */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D272EFC525C0A7F000FEB91E = {
 			isa = PBXGroup;
 			children = (
 				D272EFD025C0A7F000FEB91E /* CornholeQuickplay */,
 				D28B859725C3698D00149A72 /* CornholeQuickplayTests */,
 				D272EFCF25C0A7F000FEB91E /* Products */,
+				D26CE02825CCD07C008B1F74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -536,7 +546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devbojawn.CornholeQuickplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -557,7 +567,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devbojawn.CornholeQuickplay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -50,7 +50,7 @@ class MatchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "screenBackgroundColor")
+        view.backgroundColor = .systemBackground
         configureNavigationButtons()
         configureResultsTableView()
         presenter.sendMatchScoreData()
@@ -60,7 +60,7 @@ class MatchResultViewController: UIViewController {
         tableView.dataSource = presenter
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = UIColor(named: "screenBackgroundColor")
+        tableView.backgroundColor = .systemBackground
         tableView.register(PlayerRowCell.self, forCellReuseIdentifier: String(describing: PlayerRowCell.self))
     }
 

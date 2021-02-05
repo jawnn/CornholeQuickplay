@@ -6,7 +6,7 @@ class LineView: UIView {
         super.init(frame: .zero)
 
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = .black
+        self.backgroundColor = .tertiarySystemBackground
     }
 
     required init?(coder: NSCoder) {

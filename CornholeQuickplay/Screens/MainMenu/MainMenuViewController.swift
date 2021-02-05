@@ -34,7 +34,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "screenBackgroundColor")
+        view.backgroundColor = .systemBackground
         configureTitleLabel()
         configureGameModeButtons()
     }
@@ -42,10 +42,10 @@ class MainMenuViewController: UIViewController {
     private func configureTitleLabel() {
         titleLabel.layer.cornerRadius = 6
         titleLabel.layer.borderWidth = 2
-        titleLabel.layer.borderColor = UIColor.gray.cgColor
-        titleLabel.backgroundColor = UIColor(named: "contentBackgroundColor")
+        titleLabel.layer.borderColor = UIColor.separator.cgColor
+        titleLabel.backgroundColor = .secondarySystemBackground
         titleLabel.text = "CORNHOLE QUICKPLAY"
-        titleLabel.textColor = UIColor(named: "textColor")
+        titleLabel.textColor = .label
         titleLabel.numberOfLines = 2
         titleLabel.textAlignment = .center
         titleLabel.minimumScaleFactor = 0.7

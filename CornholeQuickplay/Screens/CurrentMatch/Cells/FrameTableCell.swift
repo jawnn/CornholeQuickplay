@@ -25,7 +25,7 @@ class FrameTableCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(systemName: "arrowtriangle.left.fill")
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
+        imageView.tintColor = .tertiarySystemBackground
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -53,7 +53,7 @@ class FrameTableCell: UITableViewCell {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(systemName: "arrowtriangle.left.fill")
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .black
+        imageView.tintColor = .label
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -75,7 +75,7 @@ class FrameTableCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: String(describing: FrameTableCell.self))
         selectionStyle = .none
-        contentView.backgroundColor = UIColor(named: "contentBackgroundColor")
+        contentView.backgroundColor = .secondarySystemBackground
         configureSubviews()
     }
 
@@ -146,19 +146,19 @@ class FrameTableCell: UITableViewCell {
         frameOutcomeLabel.textColor = scoringTeam.color
 
         redWinArrowView.isHidden = scoringTeam != .red ? true : false
-        redScoreLabel.textColor = scoringTeam == .red ? UIColor(named: "textColor") : .systemGray
-        redPitcherLabel.textColor = scoringTeam == .red ? UIColor(named: "textColor") : .systemGray
+        redScoreLabel.textColor = scoringTeam == .red ? .label : .tertiaryLabel
+        redPitcherLabel.textColor = scoringTeam == .red ? .label : .tertiaryLabel
 
         blueWinArrowView.isHidden = scoringTeam != .blue ? true : false
-        blueScoreLabel.textColor = scoringTeam == .blue ? UIColor(named: "textColor") : .systemGray
-        bluePitcherLabel.textColor = scoringTeam == .blue ? UIColor(named: "textColor") : .systemGray
+        blueScoreLabel.textColor = scoringTeam == .blue ? .label : .tertiaryLabel
+        bluePitcherLabel.textColor = scoringTeam == .blue ? .label : .tertiaryLabel
     }
 
     override func prepareForReuse() {
         redWinArrowView.isHidden = false
         blueWinArrowView.isHidden = false
         for label in [redScoreLabel, redPitcherLabel, blueScoreLabel, bluePitcherLabel] {
-            label.textColor = UIColor(named: "textColor")
+            label.textColor = .label
         }
     }
 }

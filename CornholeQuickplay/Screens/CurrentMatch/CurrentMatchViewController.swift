@@ -31,8 +31,8 @@ class CurrentMatchViewController: UIViewController {
             matchScoreView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
 
             frameHistoryTableView.topAnchor.constraint(equalTo: matchScoreView.bottomAnchor, constant: 8),
-            frameHistoryTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            frameHistoryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            frameHistoryTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            frameHistoryTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             frameHistoryTableView.bottomAnchor.constraint(equalTo: bagTossOutcomeSectionView.topAnchor, constant: -8),
 
             bagTossOutcomeSectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
@@ -66,7 +66,7 @@ class CurrentMatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor(named: "screenBackgroundColor")
+        view.backgroundColor = .systemBackground
         configureFrameHistoryTableView()
         presenter.sendNewFrameData()
         bagTossOutcomeSectionView.delegate = presenter
@@ -76,8 +76,8 @@ class CurrentMatchViewController: UIViewController {
     private func configureFrameHistoryTableView() {
         frameHistoryTableView.dataSource = presenter
         frameHistoryTableView.tableFooterView = UIView()
-        frameHistoryTableView.separatorColor = UIColor(named: "borderGray")
-        frameHistoryTableView.backgroundColor = UIColor(named: "screenBackgroundColor")
+        frameHistoryTableView.separatorColor = .separator
+        frameHistoryTableView.backgroundColor = .systemBackground
         frameHistoryTableView.register(FrameTableCell.self, forCellReuseIdentifier: String(describing: FrameTableCell.self))
     }
 

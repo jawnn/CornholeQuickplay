@@ -7,9 +7,9 @@ class CHButton: UIButton {
 
         layer.borderWidth = 2
         layer.cornerRadius = 6
-        layer.borderColor = UIColor.gray.cgColor
-        setTitleColor(UIColor(named: "textColor"), for: .normal)
-        backgroundColor = UIColor(named: "contentBackgroundColor")
+        layer.borderColor = UIColor.separator.cgColor
+        setTitleColor(.label, for: .normal)
+        backgroundColor = .secondarySystemBackground
         translatesAutoresizingMaskIntoConstraints = false
     }
 

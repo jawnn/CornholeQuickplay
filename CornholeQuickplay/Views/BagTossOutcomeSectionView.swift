@@ -60,8 +60,8 @@ class BagTossOutcomeSectionView: UIView {
 
         layer.cornerRadius = 6
         layer.borderWidth = 2
-        layer.borderColor = UIColor.gray.cgColor
-        backgroundColor = UIColor(named: "contentBackgroundColor")
+        layer.borderColor = UIColor.separator.cgColor
+        backgroundColor = .secondarySystemBackground
         translatesAutoresizingMaskIntoConstraints = false
 
         addSubviews(

@@ -43,8 +43,8 @@ class FinalScoreBanner: UIView {
 
         layer.cornerRadius = 10
         layer.borderWidth = 2
-        layer.borderColor = UIColor.gray.cgColor
-        backgroundColor = UIColor(named: "contentBackgroundColor")
+        layer.borderColor = UIColor.separator.cgColor
+        backgroundColor = .secondarySystemBackground
         translatesAutoresizingMaskIntoConstraints = false
 
         addSubviews(

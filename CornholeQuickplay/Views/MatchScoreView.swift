@@ -19,7 +19,7 @@ class MatchScoreView: UIView {
 
     let matchScoreLineDivider: PaddedLabel = {
         let label = PaddedLabel(frame: .zero)
-        label.text = "match score"
+        label.text = "Match Score"
         label.font = .systemFont(ofSize: 24, weight: .regular)
         return label
     }()
@@ -55,7 +55,7 @@ class MatchScoreView: UIView {
 
     let frameScoreLineDivider: PaddedLabel = {
         let label = PaddedLabel(frame: .zero)
-        label.text = "frame score"
+        label.text = "Frame Score"
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
@@ -79,8 +79,8 @@ class MatchScoreView: UIView {
         super.init(frame: frame)
         layer.borderWidth = 2
         layer.cornerRadius = 6
-        layer.borderColor = UIColor.gray.cgColor
-        backgroundColor = UIColor(named: "contentBackgroundColor")
+        layer.borderColor = UIColor.separator.cgColor
+        backgroundColor = .secondarySystemBackground
         translatesAutoresizingMaskIntoConstraints = false
 
         addSubviews(

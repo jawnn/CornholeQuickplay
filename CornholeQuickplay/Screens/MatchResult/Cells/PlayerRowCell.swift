@@ -16,7 +16,7 @@ class PlayerRowCell: UITableViewCell {
         let label = PaddedLabel(frame: .zero, 0, 8, 8, 0)
         label.textAlignment = .center
         label.minimumScaleFactor = 0.5
-        label.textColor = UIColor(named: "textColor")
+        label.textColor = .label
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         return label
     }()
@@ -27,13 +27,13 @@ class PlayerRowCell: UITableViewCell {
         view.layer.borderWidth = 2
         view.layer.cornerRadius = 6
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(named: "contentBackgroundColor")
+        view.backgroundColor = .secondarySystemBackground
         return view
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = UIColor(named: "screenBackgroundColor")
+        contentView.backgroundColor = .systemBackground
         layoutCellBackgroundColorView()
         layoutRowStackView()
     }
@@ -78,7 +78,6 @@ class PlayerRowCell: UITableViewCell {
 
         let totalInOnRow = layoutColumnStackView(header: "In/On", value: "\(pitcher.totalCornholes) / \(pitcher.totalOnBoard)")
         let avgeragePointsPerRoundRow = layoutColumnStackView(header: "Round Avg.", value: String(format: "%.2f", pitcher.averageScore))
-//        let scorePercentageRow = layoutColumnStackView(header: "Scoring %", value: String(format: "%.2f", pitcher.efficientcyRating))
         let deltaRow = layoutColumnStackView(header: "+/-", value: "\(pitcher.matchPlusMinus)")
 
         let statStackView = UIStackView(frame: .zero)
@@ -89,7 +88,6 @@ class PlayerRowCell: UITableViewCell {
 
         statStackView.addArrangedSubview(totalInOnRow)
         statStackView.addArrangedSubview(avgeragePointsPerRoundRow)
-//        statStackView.addArrangedSubview(scorePercentageRow)
         statStackView.addArrangedSubview(deltaRow)
         stackView.addArrangedSubview(statStackView)
     }
@@ -102,12 +100,12 @@ class PlayerRowCell: UITableViewCell {
         colStackView.distribution = .fillEqually
 
         let headerLabel = PaddedLabel(frame: .zero)
-        headerLabel.textColor = UIColor(named: "textColor")
+        headerLabel.textColor = .label
         headerLabel.font = .systemFont(ofSize: 14, weight: .regular)
         headerLabel.text = header.uppercased()
 
         let valueLabel = PaddedLabel(frame: .zero)
-        valueLabel.textColor = UIColor(named: "textColor")
+        valueLabel.textColor = .label
         valueLabel.font = .systemFont(ofSize: 18, weight: .semibold)
         valueLabel.text = value
 
